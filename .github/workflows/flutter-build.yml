@@ -1,31 +1,25 @@
-name: Build Islamic Azan Clock APK
-
-on:
-  push:
-    branches: [ main ]
-  workflow_dispatch:
-
+name: Build APK
+on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
-
-      - name: Setup Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: 'stable'
-
-      - name: Flutter Pub Get
+      - uses: actions/checkout@v4
+      
+      - name: Setup Flutter Manually
+        run: |
+          # Flutter manually install karen
+          git clone https://github.com/flutter/flutter.git -b stable --depth 1
+          echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
+          flutter --version
+          
+      - name: Install Dependencies
         run: flutter pub get
-
-      - name: Build Release APK
+          
+      - name: Build APK
         run: flutter build apk --release
-
-      - name: Upload APK Artifact
-        uses: actions/upload-artifact@v4
+        
+      - uses: actions/upload-artifact@v4
         with:
-          name: Islamic_Azan_Clock_Release
+          name: islamic-azan-clock
           path: build/app/outputs/flutter-apk/app-release.apk
