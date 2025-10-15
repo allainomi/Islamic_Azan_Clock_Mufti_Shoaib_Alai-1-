@@ -5,24 +5,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      
-      - name: Install Flutter and Build
-        run: |
-          # Flutter setup
-          wget -q https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.16.9-stable.tar.xz
-          tar xf flutter_linux_3.16.9-stable.tar.xz
-          
-          # Export PATH
+      - run: |
+          # Flutter install
+          git clone https://github.com/flutter/flutter.git -b stable
           export PATH="$PATH:$GITHUB_WORKSPACE/flutter/bin"
           
-          # Verify
-          flutter --version
-          
-          # Build
+          # Build APK
           flutter pub get
           flutter build apk --release
-        
       - uses: actions/upload-artifact@v4
         with:
-          name: azan-clock-app
+          name: app-release
           path: build/app/outputs/flutter-apk/app-release.apk
