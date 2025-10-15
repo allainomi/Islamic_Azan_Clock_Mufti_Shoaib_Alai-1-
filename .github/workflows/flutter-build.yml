@@ -6,20 +6,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup Flutter Manually
+      - name: Setup Flutter
         run: |
-          # Flutter manually install karen
-          git clone https://github.com/flutter/flutter.git -b stable --depth 1
+          wget -q https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.16.9-stable.tar.xz
+          tar xf flutter_linux_3.16.9-stable.tar.xz
           echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
-          flutter --version
-          
-      - name: Install Dependencies
-        run: flutter pub get
+          flutter doctor
           
       - name: Build APK
-        run: flutter build apk --release
+        run: |
+          flutter pub get
+          flutter build apk --release
         
       - uses: actions/upload-artifact@v4
         with:
-          name: islamic-azan-clock
+          name: azan-clock-app
           path: build/app/outputs/flutter-apk/app-release.apk
