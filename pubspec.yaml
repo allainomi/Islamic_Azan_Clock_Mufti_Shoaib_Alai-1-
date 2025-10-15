@@ -1,24 +1,21 @@
 name: islamic_azan_clock
-description: Islamic Azan & Clock by Mufti Shoaib Alai
+description: Islamic Azan Clock Application
+
+publish_to: 'none'
+
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  intl: ^0.19.0
-  hijri: ^3.0.0
-  audioplayers: ^6.0.0
-  shimmer: ^3.0.0
+  audioplayers: ^5.2.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
 
 flutter:
   uses-material-design: true
-  assets:
-    - assets/azan.mp3
