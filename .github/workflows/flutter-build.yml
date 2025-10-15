@@ -5,15 +5,27 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - run: |
-          # Flutter install
-          git clone https://github.com/flutter/flutter.git -b stable
-          export PATH="$PATH:$GITHUB_WORKSPACE/flutter/bin"
+      
+      - name: Setup Environment
+        run: |
+          # Flutter download
+          wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.16.9-stable.tar.xz
+          tar xf flutter_linux_3.16.9-stable.tar.xz
           
-          # Build APK
-          flutter pub get
-          flutter build apk --release
+          # Full path use karen
+          FLUTTER_PATH="$GITHUB_WORKSPACE/flutter/bin/flutter"
+          
+          # Verify installation
+          $FLUTTER_PATH --version
+          echo "Flutter installation successful"
+          
+      - name: Build APK
+        run: |
+          FLUTTER_PATH="$GITHUB_WORKSPACE/flutter/bin/flutter"
+          $FLUTTER_PATH pub get
+          $FLUTTER_PATH build apk --release
+        
       - uses: actions/upload-artifact@v4
         with:
-          name: app-release
+          name: islamic-app
           path: build/app/outputs/flutter-apk/app-release.apk
