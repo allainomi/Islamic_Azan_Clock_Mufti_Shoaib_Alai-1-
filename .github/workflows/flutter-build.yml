@@ -8,14 +8,26 @@ jobs:
       
       - name: Setup Flutter
         run: |
-          git clone https://github.com/flutter/flutter.git -b stable
-          export PATH="$PATH:$GITHUB_WORKSPACE/flutter/bin"
+          # Flutter install karen
+          git clone https://github.com/flutter/flutter.git -b stable --depth 1
+          
+          # Flutter path set karen
+          echo "FLUTTER_PATH=$GITHUB_WORKSPACE/flutter" >> $GITHUB_ENV
+          echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
+          
+          # Wait for PATH to update
+          sleep 5
+          
+      - name: Verify Flutter
+        run: |
           flutter --version
+          which flutter
           
       - name: Fix Dependencies
         run: |
-          # Agar audioplayers version issue ho to fix karen
+          # Audioplayers version fix karen
           sed -i 's/audioplayers: \^6\.0\.0/audioplayers: ^5.2.1/g' pubspec.yaml
+          sed -i 's/audioplayers: \^6\.\*\.\*/audioplayers: ^5.2.1/g' pubspec.yaml
           
       - name: Install Dependencies
         run: flutter pub get
