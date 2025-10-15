@@ -8,17 +8,25 @@ jobs:
       
       - name: Setup Flutter
         run: |
-          wget -q https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.16.9-stable.tar.xz
+          # Flutter download karen
+          wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.16.9-stable.tar.xz
+          
+          # Extract karen
           tar xf flutter_linux_3.16.9-stable.tar.xz
+          
+          # PATH set karen
           echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
-          flutter doctor
+          
+          # Flutter verify karen
+          $GITHUB_WORKSPACE/flutter/bin/flutter --version
+          
+      - name: Install Dependencies
+        run: $GITHUB_WORKSPACE/flutter/bin/flutter pub get
           
       - name: Build APK
-        run: |
-          flutter pub get
-          flutter build apk --release
+        run: $GITHUB_WORKSPACE/flutter/bin/flutter build apk --release
         
       - uses: actions/upload-artifact@v4
         with:
-          name: azan-clock-app
+          name: islamic-azan-clock
           path: build/app/outputs/flutter-apk/app-release.apk
