@@ -6,36 +6,19 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup Flutter
+      - name: Build with Full Path
         run: |
-          # Flutter install karen
-          git clone https://github.com/flutter/flutter.git -b stable --depth 1
+          # Flutter install
+          git clone https://github.com/flutter/flutter.git -b stable
           
-          # Flutter path set karen
-          echo "FLUTTER_PATH=$GITHUB_WORKSPACE/flutter" >> $GITHUB_ENV
-          echo "$GITHUB_WORKSPACE/flutter/bin" >> $GITHUB_PATH
+          # Full path use karen
+          FLUTTER="$GITHUB_WORKSPACE/flutter/bin/flutter"
           
-          # Wait for PATH to update
-          sleep 5
-          
-      - name: Verify Flutter
-        run: |
-          flutter --version
-          which flutter
-          
-      - name: Fix Dependencies
-        run: |
-          # Audioplayers version fix karen
-          sed -i 's/audioplayers: \^6\.0\.0/audioplayers: ^5.2.1/g' pubspec.yaml
-          sed -i 's/audioplayers: \^6\.\*\.\*/audioplayers: ^5.2.1/g' pubspec.yaml
-          
-      - name: Install Dependencies
-        run: flutter pub get
-          
-      - name: Build APK
-        run: flutter build apk --release
+          # Dependencies fix
+          $FLUTTER pub get
+          $FLUTTER build apk --release
         
       - uses: actions/upload-artifact@v4
         with:
-          name: islamic-azan-clock
+          name: azan-clock-app
           path: build/app/outputs/flutter-apk/app-release.apk
