@@ -1,56 +1,16 @@
-name: iqra_islamic_wisdom
-description: >-
-  A beautiful Islamic app providing Quran, Hadith, Fatawa, and Islamic teachings
-  with Urdu, Arabic, and English support.
+name: islamic_azan_clock_mufti_shoaib_alai
+description: "Islamic Azan Clock App"
 
-publish_to: 'none' # Remove if publishing to pub.dev
-
+publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: ">=3.4.0 <4.0.0"
+  sdk: '>=3.0.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-
-  # --- Core UI & Design ---
-  cupertino_icons: ^1.0.8
-  google_fonts: ^6.2.0
-  font_awesome_flutter: ^10.7.0
-
-  # --- Quran & Islamic Content ---
-  quran: ^3.0.2
-  http: ^1.4.0
-  html: ^0.15.6
-  intl: ^0.20.2
-
-  # --- Navigation & State Management ---
-  provider: ^6.1.2
-  get: ^4.6.6
-
-  # --- Multimedia & Sharing ---
-  share_plus: ^10.0.2
-  url_launcher: ^6.3.0
-  flutter_tts: ^3.8.0
-  just_audio: ^0.9.42
-
-  # --- Data Storage ---
-  shared_preferences: ^2.3.3
-  path_provider: ^2.1.4
-  sqflite: ^2.4.0
-
-  # --- UI Enhancements ---
-  carousel_slider: ^5.0.0
-  smooth_page_indicator: ^1.2.0
-  animated_text_kit: ^4.2.2
-  lottie: ^3.2.0
-
-  # --- Miscellaneous ---
-  flutter_svg: ^2.0.10+1
-  connectivity_plus: ^6.0.3
-  package_info_plus: ^8.0.0
-  flutter_local_notifications: ^17.2.3
+  # دیگر ضروری dependencies
 
 dev_dependencies:
   flutter_test:
@@ -59,22 +19,5 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
   assets:
-    - assets/images/
-    - assets/icons/
-    - assets/quran/
-    - assets/hadith/
-    - assets/audio/
-    - assets/fonts/
-
-  fonts:
-    - family: QuranFont
-      fonts:
-        - asset: assets/fonts/me_quran.ttf
-    - family: ArabicFont
-      fonts:
-        - asset: assets/fonts/uthmanic.ttf
-    - family: UrduFont
-      fonts:
-        - asset: assets/fonts/noori_nastaleeq.ttf
+    - assets/
