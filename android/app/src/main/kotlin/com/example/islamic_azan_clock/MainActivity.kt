@@ -1,4 +1,4 @@
-package com.example.islamic_azan_clock
+package com.example.my_flutter_app
 
 import io.flutter.embedding.android.FlutterActivity
 
